@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Morphe Android TV Patches</title>
+  <meta name="description" content="Application pour Android TV, affichage plein écran en mode paysage.">
+  <meta name="theme-color" content="#0b1020">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    :root { --bg: #0b1020; --fg: #f4f6fb; --accent: #ffd400; --muted: #9aa3bd; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4vmin;
+    }
+    main { max-width: 900px; }
+    img { width: 22vmin; max-width: 160px; height: auto; margin-bottom: 3vmin; }
+    h1 { font-size: clamp(1.8rem, 6vmin, 3.4rem); color: var(--accent); margin-bottom: 1.5vmin; }
+    p { font-size: clamp(1rem, 3vmin, 1.6rem); color: var(--muted); line-height: 1.5; }
+    a.btn {
+      display: inline-block;
+      margin-top: 4vmin;
+      padding: 1.6vmin 4vmin;
+      border: 3px solid var(--accent);
+      border-radius: 14px;
+      color: var(--accent);
+      font-size: clamp(1rem, 3vmin, 1.6rem);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a.btn:focus, a.btn:hover { background: var(--accent); color: var(--bg); outline: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="icon-192.png" alt="Logo">
+    <h1>Morphe Android TV Patches</h1>
+    <p>Application pour Android TV, affichage plein écran en mode paysage.</p>
+    <a class="btn" href="https://github.com/MahMoh1960/morphe-androidtv-patches" tabindex="0">Ouvrir le projet</a>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      });
+    }
+  </script>
+</body>
+</html>
