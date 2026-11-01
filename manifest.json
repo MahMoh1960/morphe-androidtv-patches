@@ -1,0 +1,21 @@
+{
+  "name": "Morphe Android TV Patches",
+  "short_name": "Morphe TV",
+  "description": "Application pour Android TV, affichage plein écran en mode paysage.",
+  "id": "/morphe-androidtv-patches/",
+  "start_url": "/morphe-androidtv-patches/",
+  "scope": "/morphe-androidtv-patches/",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "landscape",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "lang": "fr",
+  "dir": "ltr",
+  "categories": ["entertainment", "utilities"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
