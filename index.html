@@ -4,50 +4,160 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Morphe Android TV Patches</title>
-  <meta name="description" content="Application pour Android TV, affichage plein écran en mode paysage.">
+  <meta name="description" content="Guide d'installation et état des patchs Morphe pour Android TV.">
   <meta name="theme-color" content="#0b1020">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-192.png">
   <style>
-    :root { --bg: #0b1020; --fg: #f4f6fb; --accent: #ffd400; --muted: #9aa3bd; }
+    :root {
+      --bg: #0b1020; --card: #141b33; --fg: #f4f6fb; --muted: #a9b2cc;
+      --accent: #ffd400; --ok: #3ddc57; --ko: #ff4d4d; --warn: #ffb020;
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
     body {
-      background: var(--bg);
-      color: var(--fg);
+      background: var(--bg); color: var(--fg);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 4vmin;
+      font-size: clamp(16px, 2.4vmin, 26px); line-height: 1.55;
+      padding: 4vmin 5vw 8vmin;
     }
-    main { max-width: 900px; }
-    img { width: 22vmin; max-width: 160px; height: auto; margin-bottom: 3vmin; }
-    h1 { font-size: clamp(1.8rem, 6vmin, 3.4rem); color: var(--accent); margin-bottom: 1.5vmin; }
-    p { font-size: clamp(1rem, 3vmin, 1.6rem); color: var(--muted); line-height: 1.5; }
-    a.btn {
-      display: inline-block;
-      margin-top: 4vmin;
-      padding: 1.6vmin 4vmin;
-      border: 3px solid var(--accent);
-      border-radius: 14px;
-      color: var(--accent);
-      font-size: clamp(1rem, 3vmin, 1.6rem);
-      font-weight: 600;
-      text-decoration: none;
+    header { display: flex; align-items: center; gap: 3vmin; margin-bottom: 4vmin; }
+    header img { width: 12vmin; max-width: 110px; height: auto; }
+    h1 { color: var(--accent); font-size: 1.9em; line-height: 1.15; }
+    header p { color: var(--muted); }
+    h2 { color: var(--accent); font-size: 1.35em; margin: 5vmin 0 2vmin; }
+    .panel, .card {
+      background: var(--card); border: 3px solid transparent; border-radius: 16px;
+      padding: 2.4vmin 3vmin; margin-bottom: 2vmin;
     }
-    a.btn:focus, a.btn:hover { background: var(--accent); color: var(--bg); outline: none; }
+    .panel:focus, .card:focus { outline: none; border-color: var(--accent); background: #1b2547; }
+    ol { padding-left: 1.4em; }
+    ol li { margin: 0.5em 0; }
+    code {
+      background: #0b1020; border-radius: 6px; padding: 0.1em 0.45em;
+      font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.92em; color: var(--accent);
+    }
+    .warn { border-left: 8px solid var(--warn); }
+    .stop { border-left: 8px solid var(--ko); }
+    .panel h3 { font-size: 1.05em; margin-bottom: 0.4em; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 2vmin; }
+    .grid .card { margin: 0; }
+    .name { display: flex; align-items: center; gap: 0.6em; font-weight: 700; font-size: 1.15em; margin-bottom: 0.3em; }
+    .dot { width: 0.8em; height: 0.8em; border-radius: 50%; flex: none; }
+    .ok .dot { background: var(--ok); }
+    .ko .dot { background: var(--ko); }
+    .what { color: var(--muted); margin-bottom: 0.5em; }
+    .ver { font-size: 0.9em; }
+    .legend { color: var(--muted); margin-bottom: 2vmin; }
+    .hint { color: var(--muted); text-align: center; margin-top: 5vmin; font-size: 0.85em; }
   </style>
 </head>
 <body>
-  <main>
+  <header>
     <img src="icon-192.png" alt="Logo">
-    <h1>Morphe Android TV Patches</h1>
-    <p>Application pour Android TV, affichage plein écran en mode paysage.</p>
-    <a class="btn" href="https://github.com/MahMoh1960/morphe-androidtv-patches" tabindex="0">Ouvrir le projet</a>
-  </main>
+    <div>
+      <h1>Morphe Android TV Patches</h1>
+      <p>Guide d'installation et état des patchs pour Android TV</p>
+    </div>
+  </header>
+
+  <h2>📥 Comment installer</h2>
+  <div class="panel" tabindex="0">
+    <p>Tous les patchs suivent la même procédure, avec <strong>Morphe Manager</strong> :</p>
+    <ol>
+      <li>Télécharger le bon fichier <code>.apkm</code> <strong>Android TV</strong> depuis APKMirror (liens directs dans le dépôt).</li>
+      <li>Dans Morphe Manager, vérifier que <strong>« Optimiser pour l'architecture de l'appareil »</strong> est <strong>désactivé</strong>.</li>
+      <li>Ouvrir Morphe Manager et sélectionner le fichier <code>.apkm</code>.</li>
+      <li>Appliquer le patch.</li>
+    </ol>
+  </div>
+
+  <div class="panel warn" tabindex="0">
+    <h3>⚠️ Prendre la version Android TV, pas celle du téléphone ni de Fire TV</h3>
+    <p>Plusieurs applications existent en version téléphone et/ou Fire TV sous le <em>même</em> nom de paquet : le patch serait alors incorrect ou sans effet. Respecter la <strong>version exacte</strong> indiquée, télécharger le <code>.apkm</code> (App Bundle) et non un <code>.apk</code> d'une seule architecture. Si plusieurs bundles sont proposés, choisir celui dont la colonne d'architecture inclut <code>armeabi-v7a</code>.</p>
+  </div>
+
+  <div class="panel stop" tabindex="0">
+    <h3>🛑 Désactiver « Optimiser pour l'architecture de l'appareil » avant de patcher</h3>
+    <p>C'est un réglage du mode Expert (désactivé par défaut). Activé, le Manager ne conserve que l'architecture du processeur de l'appareil qui effectue le patch. Patcher sur un téléphone (arm64) puis installer sur un boîtier TV peut faire perdre les bibliothèques <code>armeabi-v7a</code> dont dépendent de nombreuses applications TV (Prime Video, Netflix). Symptômes : installation impossible, fermeture immédiate au lancement, ou patch sans effet. Dans ce cas, désactiver l'option et patcher de nouveau.</p>
+  </div>
+
+  <h2>📊 État des patchs</h2>
+  <p class="legend">🟢 disponible · 🔴 en développement</p>
+
+  <div class="grid">
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Disney+</div>
+      <div class="what">Publicités (pré/mi-roll) + publicités de pause</div>
+      <div class="ver">Version testée : <code>26.16.0+rc2-2026.09.08</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Prime Video</div>
+      <div class="what">Publicités films et séries (bandeau natif) · ⚠️ rester sur 6.23.23</div>
+      <div class="ver">Version testée : <code>6.23.23+v15.5.0.70-armv7a</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Netflix</div>
+      <div class="what">Publicités pré/mi-roll + de pause · s'installe comme un clone</div>
+      <div class="ver">Version testée : <code>13.0.1 build 25028</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>HBO Max</div>
+      <div class="what">Toutes les publicités, y compris le SSAI intégré (flux sans pub)</div>
+      <div class="ver">Version testée : <code>7.9.0.61</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Peacock</div>
+      <div class="what">Publicités VOD</div>
+      <div class="ver">Versions testées : <code>7.10.102</code> · <code>7.8.100</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Tubi</div>
+      <div class="what">Publicités (+ blocage des statistiques, optionnel)</div>
+      <div class="ver">Version testée : <code>10.40.5000</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>ViX</div>
+      <div class="what">Publicités</div>
+      <div class="ver">Version testée : <code>4.47.2_tv</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Pluto TV</div>
+      <div class="what">Publicités VOD · coupures du direct masquées (optionnel)</div>
+      <div class="ver">Version testée : <code>5.66.0-leanback</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Paramount+</div>
+      <div class="what">Publicités VOD + de pause · direct non modifié</div>
+      <div class="ver">Version testée : <code>16.17.0</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>Twitch</div>
+      <div class="what">Bandeau publicitaire + publicités du direct masquées · version TV uniquement</div>
+      <div class="ver">Version testée : <code>13.0.0.2</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>ESPN</div>
+      <div class="what">Coupures du direct masquées (écran + sourdine) · publicités VOD</div>
+      <div class="ver">Version testée : <code>6.11.1</code></div>
+    </div>
+    <div class="card ok" tabindex="0">
+      <div class="name"><span class="dot"></span>RTÉ Player</div>
+      <div class="what">Publicités VOD · 🇮🇪 accès restreint à l'Irlande</div>
+      <div class="ver">Version testée : <code>3.160.3</code></div>
+    </div>
+    <div class="card ko" tabindex="0">
+      <div class="name"><span class="dot"></span>Fox One</div>
+      <div class="what">En développement</div>
+    </div>
+    <div class="card ko" tabindex="0">
+      <div class="name"><span class="dot"></span>MLB TV</div>
+      <div class="what">En développement</div>
+    </div>
+  </div>
+
+  <p class="hint">Navigation : flèches haut/bas de la télécommande</p>
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -55,6 +165,38 @@
         navigator.serviceWorker.register('sw.js').catch(function () {});
       });
     }
+
+    // Navigation à la télécommande (flèches) entre les blocs focalisables
+    (function () {
+      var items = Array.prototype.slice.call(document.querySelectorAll('[tabindex="0"]'));
+      if (items.length) items[0].focus({ preventScroll: true });
+
+      function cols() {
+        var first = items.filter(function (el) { return el.classList.contains('card'); });
+        if (first.length < 2) return 1;
+        var top = first[0].offsetTop, n = 0;
+        for (var i = 0; i < first.length; i++) { if (first[i].offsetTop === top) n++; else break; }
+        return Math.max(n, 1);
+      }
+
+      function go(target) {
+        if (!target) return;
+        target.focus({ preventScroll: true });
+        target.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        var i = items.indexOf(document.activeElement);
+        if (i < 0) i = 0;
+        var c = items[i].classList.contains('card') ? cols() : 1;
+        var next = null;
+        if (e.key === 'ArrowDown') next = items[Math.min(i + c, items.length - 1)];
+        else if (e.key === 'ArrowUp') next = items[Math.max(i - c, 0)];
+        else if (e.key === 'ArrowRight') next = items[Math.min(i + 1, items.length - 1)];
+        else if (e.key === 'ArrowLeft') next = items[Math.max(i - 1, 0)];
+        if (next) { e.preventDefault(); go(next); }
+      });
+    })();
   </script>
 </body>
 </html>
