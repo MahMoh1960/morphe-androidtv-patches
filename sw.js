@@ -1,4 +1,4 @@
-const CACHE = 'morphe-tv-v1';
+const CACHE = 'morphe-tv-v2';
 const BASE = '/morphe-androidtv-patches/';
 const ASSETS = [
   BASE,
@@ -24,20 +24,20 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Réseau d'abord (toujours la dernière version en ligne), cache en secours hors connexion
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const network = fetch(event.request)
-        .then((resp) => {
-          if (resp && resp.status === 200 && resp.type === 'basic') {
-            const copy = resp.clone();
-            caches.open(CACHE).then((c) => c.put(event.request, copy));
-          }
-          return resp;
-        })
-        .catch(() => cached || caches.match(BASE + 'index.html'));
-      return cached || network;
-    })
+    fetch(event.request, { cache: 'no-cache' })
+      .then((resp) => {
+        if (resp && resp.status === 200 && resp.type === 'basic') {
+          const copy = resp.clone();
+          caches.open(CACHE).then((c) => c.put(event.request, copy));
+        }
+        return resp;
+      })
+      .catch(() =>
+        caches.match(event.request).then((cached) => cached || caches.match(BASE + 'index.html'))
+      )
   );
 });
